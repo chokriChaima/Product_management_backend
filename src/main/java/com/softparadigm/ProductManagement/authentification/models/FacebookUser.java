@@ -64,6 +64,9 @@ public class FacebookUser {
         return shoppingCartID;
     }
 
+    public FacebookUser() {
+    }
+
     public void setShoppingCartID(String shoppingCartID) {
         this.shoppingCartID = shoppingCartID;
     }

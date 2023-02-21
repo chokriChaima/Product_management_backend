@@ -23,8 +23,8 @@ public class FacebookUserController {
 
 
     @PostMapping("/new-user")
-    public FacebookUser addUser(@RequestBody FacebookUser user) {
-        return facebookUserService.addFacebookUser(user);
+    public FacebookUser addUser(@RequestBody String accessToken) {
+        return facebookUserService.addFacebookUser(accessToken);
     }
 
 //    @DeleteMapping

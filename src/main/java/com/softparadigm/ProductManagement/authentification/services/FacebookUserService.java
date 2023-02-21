@@ -31,18 +31,31 @@ public class FacebookUserService {
         return facebookUserRepository.findById(facebookUserID).get();
     }
 
-    // Sign Up Process
-    public FacebookUser addFacebookUser(FacebookUser user) {
+    FacebookUser _convertUserDataToFacebookUser(Map<String, String> data) {
+
+        FacebookUser facebookUser = new FacebookUser();
+        facebookUser.setEmail(data.get("email"));
+        facebookUser.setId(data.get("id"));
+        facebookUser.setName(data.get("name"));
         ShoppingCartDTO shoppingCartDTO = shoppingCartService.addShoppingCart();
-        user.setShoppingCartID(shoppingCartDTO.getId());
-        return facebookUserRepository.save(user);
+        facebookUser.setShoppingCartID(shoppingCartDTO.getId());
+        return facebookUser;
+    }
+
+    // Sign Up Process
+    public FacebookUser addFacebookUser(String accessToken) {
+
+        Map<String, String> userData = _getUserData(accessToken);
+
+        FacebookUser facebookUser = _convertUserDataToFacebookUser(userData);
+        return facebookUserRepository.save(facebookUser);
     }
 
     public String authenticateFacebookUser(String accessToken) {
         System.out.println("Authenticate Facebook User with access token = " + accessToken);
 
         // get user data from the access token with url
-        Map<String,String> data = _getUserData(accessToken);
+        Map<String, String> data = _getUserData(accessToken);
 
         //query database to find current user
         FacebookUser facebookUser = _getFacebookUserByID(data.get("id"));
@@ -67,6 +80,7 @@ public class FacebookUserService {
     public FacebookUser _getFacebookUserByID(String id) {
         return facebookUserRepository.findById(id).get();
     }
+
 //    public String deleteFacebookUser(String accessToken) {
 //
 //    }
