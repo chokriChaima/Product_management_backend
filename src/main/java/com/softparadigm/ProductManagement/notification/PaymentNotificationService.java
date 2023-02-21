@@ -14,7 +14,7 @@ import java.util.List;
 public class PaymentNotificationService {
     private PaymentNotificationRepository paymentNotificationRepository;
     private final FirebaseMessagingObject firebaseMessagingObject;
-    private static final String _TOKEN = "cP8fzIh5SXSbUIGXt23aNm:APA91bG6edx8hHfjWDn1v07jDQlCLh33C74JTGKw07qkhYFRMit5gvV2jOuoV3IGr65VJ9C9OcdL0SHck2L3ERvrZVIyKgMu0gvjXGTRC6fbXns-gJEhCM-BYtExtVeUlzwVKE07TeqB";
+    private static final String _TOKEN = "cIVG_xJDSby5kABkt-A4n8:APA91bFk3JytZJlNnahS3YFN_oDQdbE1inPFYvjiEAI5PL4O2mZw2-mFx_iDID2zTj7RGGp2T5qAaBVLWPJMwaMyms_ZeAFL6fRAU9WpIIMabmWq7pVdCXNGVRrqnxHTiv185wCjkxYm";
 
 
     @Autowired
