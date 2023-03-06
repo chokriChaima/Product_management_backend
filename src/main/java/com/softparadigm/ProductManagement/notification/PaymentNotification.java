@@ -21,10 +21,6 @@ public class PaymentNotification {
         return shoppingCartID;
     }
 
-    public void setShoppingCartID(String shoppingCartID) {
-        this.shoppingCartID = shoppingCartID;
-    }
-
     public String getId() {
         return id;
     }

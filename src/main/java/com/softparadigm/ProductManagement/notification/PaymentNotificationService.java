@@ -66,7 +66,5 @@ public class PaymentNotificationService {
         return paymentNotificationRepository.findAllByShoppingCartID(id);
     }
 
-    public PaymentNotification getNotificationByID(String id) {
-        return  paymentNotificationRepository.findById(id).get();
-    }
+
 }

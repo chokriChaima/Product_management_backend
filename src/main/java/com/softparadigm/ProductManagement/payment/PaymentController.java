@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("api/payment")
+@RequestMapping("api/secure/payment")
 public class PaymentController {
 
     final PaymentService _paymentService ;
@@ -17,10 +17,6 @@ public class PaymentController {
         this._paymentService = paymentService;
     };
 
-    @GetMapping
-    List<Payment> getAllPayments(){
-        return _paymentService.getPayments();
-    }
 
     @PostMapping("/addPayment")
     Payment addPayment(@RequestBody Payment newPayment)

@@ -1,21 +1,30 @@
-package com.softparadigm.ProductManagement.authentification.services;
+package com.softparadigm.ProductManagement.users.services;
 
-import com.softparadigm.ProductManagement.authentification.models.LocalUser;
-import com.softparadigm.ProductManagement.authentification.repositories.LocalUserRepository;
+import com.softparadigm.ProductManagement.users.entities.LocalUser;
 import com.softparadigm.ProductManagement.shoppingcart.ShoppingCartService;
 import com.softparadigm.ProductManagement.shoppingcart.dtos.ShoppingCartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
-public class LocalUserService {
-    final LocalUserRepository userRepository;
+public abstract class AbstractLocalUserService {
+    final MongoRepository userRepository;
     final ShoppingCartService shoppingCartService;
 
+    public MongoRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public ShoppingCartService getShoppingCartService() {
+        return shoppingCartService;
+    }
+
     @Autowired
-    public LocalUserService(LocalUserRepository userRepository, ShoppingCartService shoppingCartService) {
+    public AbstractLocalUserService(MongoRepository userRepository, ShoppingCartService shoppingCartService) {
         this.userRepository = userRepository;
         this.shoppingCartService = shoppingCartService;
     }
@@ -28,15 +37,17 @@ public class LocalUserService {
     public LocalUser addUser(LocalUser user) {
         ShoppingCartDTO shoppingCartDTO = shoppingCartService.addShoppingCart();
         user.setShoppingCartID(shoppingCartDTO.getId());
-        return userRepository.save(user);
+        return (LocalUser) userRepository.save(user);
     }
 
-    public LocalUser getUserByEmailAndPassword(String email, String password){
-        return userRepository.findUserByEmailAndPassword(email,password);
-    }
 
     public String deleteUser(String userID) {
         userRepository.deleteById(userID);
         return "User with id " + userID + " has been deleted";
+    }
+
+
+    public LocalUser getUserByID(String id) {
+        return (LocalUser) userRepository.findById(id).get();
     }
 }
