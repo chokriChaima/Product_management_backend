@@ -1,0 +1,36 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "synonym_filter": {
+          "type": "synonym",
+          "synonyms_path": "analysis/products_synonym.txt"
+        }
+      },
+      "analyzer": {
+        "synonym_analyzer": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "synonym_filter"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "title": {
+        "type": "text",
+        "analyzer": "synonym_analyzer"
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "synonym_analyzer"
+      }
+    }
+  }
+  }
+
+
+
